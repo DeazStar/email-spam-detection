@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from starter import predict_naive_bayes
+import os
 
 app = Flask(__name__)
 
@@ -26,4 +27,6 @@ def handle_spam_detection():
         
         return jsonify(error_response), 400
 if __name__ == '__main__':
-    app.run()
+    host = os.getenv('HOST', '0.0.0.0')
+    port = int(os.getenv('PORT', 5000))
+    app.run(host=host, port=port)
